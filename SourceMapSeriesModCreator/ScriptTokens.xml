@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ScriptTokens>
+  <Tokens>
+    <Token Name="ModTitle"/>
+    <Token Name="EventTitle"/>
+    <Token Name="EventLongPlacement"/>
+    <Token Name="EventShortPlacement" Default="stats_overview"/>
+    <Token Name="EventComment"/> <!--Used in bonus maps dialog-->
+
+    <Token Name="BackgroundMap" Default="background01"/>
+    <Token Name="BackgroundMap2" Default="background01"/>
+    <Token Name="BonusMapInfo"/>
+
+    <Token Name="LocalizationTokens"/>
+    <Token Name="CloseCaptionTokens"/>
+
+     <!-- TODO: Phase out manifests? -->
+    <Token Name="Soundscripts"/>
+    <Token Name="Soundscapes"/>
+  </Tokens>
+  <Files>
+    <File Name="gameinfo.txt"/>
+    <File Name="scripts/ChapterBackgrounds.txt"/>
+    <File Name="resource/closecaption_english.txt"/>
+    <File Name="resource/$ModTitle$_english.txt"/>
+    <File Name="resource/gamemenu.res"/>
+
+    <Folder Name="maps/$EventShortPlacement$"/>
+    <File Name="maps/$EventShortPlacement$/folderinfo.bns"/>
+    <File Name="maps/$EventShortPlacement$/$EventShortPlacement$.bns"/>
+
+    <File Name="materials/console/background_$EventShortPlacement$.vmt"/>
+    <File Name="materials/console/background_$EventShortPlacement$_startup.vmt"/>
+    <File Name="materials/console/background_$EventShortPlacement$_startup_widescreen.vmt"/>
+    <File Name="materials/console/background_$EventShortPlacement$_widescreen.vmt"/>
+
+    <!-- TODO: Phase out manifests? -->
+    <File Name="scripts/game_sounds_manifest.txt"/>
+    <File Name="scripts/soundscapes_manifest.txt"/>
+  </Files>
+</ScriptTokens>
