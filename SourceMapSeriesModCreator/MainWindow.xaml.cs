@@ -69,7 +69,7 @@ namespace SourceMapSeriesModCreator
             ContentCheck.Window = this;
 
             // Set default values
-            BinDirectoryBox.Text = @"C:\Program Files (x86)\Steam\SteamApps\common\Half-Life 2\bin";
+            BinDirectoryBox.Text = @"C:\Program Files (x86)\Steam\SteamApps\common\Source SDK Base 2013 Singleplayer\bin";
             SourceContentDirectoryBox.Text = @"E:\Map Labs\Mod Template\File Lists";
 
             TemplateDirectoryBox.Text = @"E:\Map Labs\Mod Template\tool-tokenized-current";
@@ -95,10 +95,10 @@ namespace SourceMapSeriesModCreator
 
             DG1.DataContext = EntryData;
             
-            EntryData.Add( new MapEntry("Hot Soft Iron", "chickensushi", CompPlacement.None, "Example") );
-            EntryData.Add( new MapEntry("Light Runner 4", "2upE", CompPlacement.None, "Example") );
-            EntryData.Add( new MapEntry("Average Title", "casstle", CompPlacement.None, "Example") );
-            EntryData.Add( new MapEntry("Night of Blue Mail", "Axolossil", CompPlacement.None, "Example") );
+            //EntryData.Add( new MapEntry("Hot Soft Iron", "chickensushi", CompPlacement.None, "Example") );
+            //EntryData.Add( new MapEntry("Light Runner 4", "2upE", CompPlacement.None, "Example") );
+            //EntryData.Add( new MapEntry("Average Title", "casstle", CompPlacement.None, "Example") );
+            //EntryData.Add( new MapEntry("Night of Blue Mail", "Axolossil", CompPlacement.None, "Example") );
 
             //EntryData.Add( new MapEntry("Test Entry 1", "Someone") );
             //EntryData.Add( new MapEntry("test entry 2", "Somebody") );
@@ -160,7 +160,7 @@ namespace SourceMapSeriesModCreator
             // ------------------------------
 
             EntryListAdd.IsEnabled = toggle;
-            EntryListPrint.IsEnabled = toggle;
+            //EntryListPrint.IsEnabled = toggle;
             EntryListShuffle.IsEnabled = toggle;
             EntryListSave.IsEnabled = toggle;
             EntryListLoad.IsEnabled = toggle;
@@ -170,13 +170,8 @@ namespace SourceMapSeriesModCreator
             CreateModButton.IsEnabled = toggle;
         }
 
-        private void EntryListSave_Click(object sender, RoutedEventArgs e)
+        private void SaveEntries(string fileName)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "XML files (*.xml)|*.xml";
-            if (saveFileDialog.ShowDialog() == false)
-                return;
-
             // Save XML containing the data
             XmlDocument xml = new XmlDocument();
             XmlElement xmlRoot = xml.CreateElement("MapSeriesModCreatorManifest");
@@ -260,7 +255,73 @@ namespace SourceMapSeriesModCreator
 
             xmlRoot.AppendChild(entries);
 
-            xml.Save(saveFileDialog.FileName);
+            xml.Save(fileName);
+        }
+
+        private async void ButtonSaveAnimation(Button button)
+        {
+            object buttonContent = button.Content;
+
+            // Disable both buttons, change the one that was used to "Saved!"
+            EntryListSave.IsEnabled = false;
+            EntryListSaveAs.IsEnabled = false;
+            button.Content = "Saved!";
+            button.FontStyle = FontStyles.Italic;
+
+            await Task.Delay(TimeSpan.FromSeconds(3));
+
+            EntryListSave.IsEnabled = true;
+            EntryListSaveAs.IsEnabled = true;
+            button.Content = buttonContent;
+            button.FontStyle = FontStyles.Normal;
+
+            //button.IsEnabled = false;
+
+            // UNDONE: Green flash
+
+            //object buttonContent = button.Content;
+            //Brush buttonBG = button.Background;
+            //
+            //button.Content = "Saved!";
+            //button.Background = Brushes.LightGreen;
+            //
+            //await Task.Delay(TimeSpan.FromSeconds(0.25));
+            //button.Background = buttonBG;
+            //await Task.Delay(TimeSpan.FromSeconds(0.25));
+            //button.Background = Brushes.LightGreen;
+            //await Task.Delay(TimeSpan.FromSeconds(0.25));
+            //button.Background = buttonBG;
+            //await Task.Delay(TimeSpan.FromSeconds(0.25));
+            //
+            //button.Content = buttonContent;
+        }
+
+        private string LastFileName = null;
+
+        private void EntryListSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (LastFileName == null)
+            {
+                EntryListSaveAs_Click(sender, e);
+                return;
+            }
+
+            SaveEntries(LastFileName);
+
+            ButtonSaveAnimation(EntryListSave);
+        }
+
+        private void EntryListSaveAs_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "XML files (*.xml)|*.xml";
+            if (saveFileDialog.ShowDialog() == false)
+                return;
+
+            SaveEntries(saveFileDialog.FileName);
+            LastFileName = saveFileDialog.FileName;
+
+            ButtonSaveAnimation(EntryListSaveAs);
         }
 
         private string GetXMLAttribute(XmlNode node, string name, string defaultVal = "")
@@ -361,6 +422,8 @@ namespace SourceMapSeriesModCreator
             {
                 EntryData.Add(entry);
             }
+
+            LastFileName = openFileDialog.FileName;
         }
 
         private bool RanContentCheck = false;
@@ -368,7 +431,28 @@ namespace SourceMapSeriesModCreator
         private void ContentCheck_Click(object sender, RoutedEventArgs e)
         {
             RanContentCheck = true;
+
+            // Add misc directory and BG map directory to the entry list
+            MapEntry miscDir = null;
+            if (!String.IsNullOrEmpty(MiscDirectoryBox.Text))
+            {
+                miscDir = new MapEntry(EventShortPlacementBox.Text + " Misc", "", CompPlacement.NonEntry, "", MiscDirectoryBox.Text);
+                EntryData.Add(miscDir);
+            }
+
+            MapEntry bgDir = null;
+            if (!String.IsNullOrEmpty(BGMapDirectoryBox.Text))
+            {
+                bgDir = new MapEntry(EventShortPlacementBox.Text + " BG", "", CompPlacement.NonEntry, "", BGMapDirectoryBox.Text);
+                EntryData.Add(bgDir);
+            }
+
             ContentCheck.RunContentCheck();
+
+            if (miscDir != null)
+                EntryData.Remove(miscDir);
+            if (bgDir != null)
+                EntryData.Remove(bgDir);
         }
 
         private void SourceContentMakeFileList_Click(object sender, RoutedEventArgs e)

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SourceMapSeriesModCreator"
         mc:Ignorable="d"
-        Title="Map Labs Mod Creator" Height="725" Width="800"
-        MinHeight="725" MinWidth="800"
+        Title="Map Labs Mod Creator" Height="700" Width="800"
+        MinHeight="700" MinWidth="800"
         >
     <!--ResizeMode="NoResize"-->
     <Grid>
@@ -46,11 +46,11 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="50"/>
-            <RowDefinition Height="32"/>
+            <!--<RowDefinition Height="32"/>-->
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="Description" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="10" Margin="0,0,0,24"
-                   FontSize="12" TextWrapping="Wrap" TextAlignment="Left">
+                   FontSize="13" TextWrapping="Wrap" TextAlignment="Left">
             This tool creates sourcemods for a series of maps. Some fields will show tooltips if you hover over them.<LineBreak/>
             Terminology is based on what's used in Map Labs mapping competitions.
         </TextBlock>
@@ -130,14 +130,14 @@
 
         <TextBlock x:Name="PackageIntoVPK" Grid.Column="6" Grid.Row="8" Margin="0,0,0,4"
                   Grid.ColumnSpan="3" Text="Package into VPKs" FontSize="14"/>
-        <CheckBox x:Name="PackageIntoVPKBox" Grid.Column="6" Grid.Row="9" Height="25"
+        <CheckBox x:Name="PackageIntoVPKBox" Grid.Column="6" Grid.Row="9" Height="25" IsChecked="True"
                  Grid.ColumnSpan="1"
                 FontSize="15"
                 Margin="2,0,0,20"/>
 
         <TextBlock x:Name="SortFiles" Grid.Column="9" Grid.Row="8" Margin="0,0,0,4"
                   Grid.ColumnSpan="3" Text="Sort misplaced files" FontSize="14"/>
-        <CheckBox x:Name="SortFilesBox" Grid.Column="9" Grid.Row="9" Height="25"
+        <CheckBox x:Name="SortFilesBox" Grid.Column="9" Grid.Row="9" Height="25" IsChecked="True"
                  Grid.ColumnSpan="1"
                 FontSize="15" ToolTip="Puts VMFs into mapsrc, loose .txt files into readmes, etc."
                 Margin="2,0,0,20"/>
@@ -159,38 +159,42 @@
                 HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Height="25" MinWidth="120" FontSize="16" Content="Add Entry"
                 Margin="10,5,10,0" Click="EntryListAdd_Click"/>
-        <Button x:Name="EntryListPrint" Grid.Row="10" Grid.Column="11"
+        <!--<Button x:Name="EntryListPrint" Grid.Row="10" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Height="25" FontSize="16" Content="Print Entries"
-                Margin="10,35,10,0" Click="EntryListPrint_Click"/>
+                Margin="10,35,10,0" Click="EntryListPrint_Click"/>-->
         <Button x:Name="EntryListShuffle" Grid.Row="10" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Height="25" FontSize="16" Content="Shuffle Entries"
-                Margin="10,65,10,0" Click="EntryListShuffle_Click"/>
+                Margin="10,35,10,0" Click="EntryListShuffle_Click"/>
 
-        <Button x:Name="EntryListSave" Grid.Row="10" Grid.Column="11"
-                HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                Height="25" FontSize="16" Content="Save List"
-                Margin="10,105,10,0" Click="EntryListSave_Click"/>
-        <Button x:Name="EntryListLoad" Grid.Row="10" Grid.Column="11"
-                HorizontalAlignment="Stretch" VerticalAlignment="Top"
-                Height="25" FontSize="16" Content="Load List"
-                Margin="10,135,10,10" Click="EntryListLoad_Click"/>
+        <Button x:Name="EntryListSave" Grid.Row="11" Grid.Column="11"
+                HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                Height="25" FontSize="16" Content="Save"
+                Margin="10,10,10,65" Click="EntryListSave_Click"/>
+        <Button x:Name="EntryListSaveAs" Grid.Row="11" Grid.Column="11"
+                HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                Height="25" FontSize="16" Content="Save As"
+                Margin="10,10,10,35" Click="EntryListSaveAs_Click"/>
+        <Button x:Name="EntryListLoad" Grid.Row="11" Grid.Column="11"
+                HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+                Height="25" FontSize="16" Content="Load"
+                Margin="10,10,10,5" Click="EntryListLoad_Click"/>
 
-        <TextBlock x:Name="MiscDirectoryDesc" Grid.Column="1" Grid.Row="12" Margin="0,0,0,4"
+        <TextBlock x:Name="MiscDirectoryDesc" Grid.Column="1" Grid.Row="12" Margin="0,8,0,4"
                    Text="Misc Directory" FontSize="16"/>
         <TextBox x:Name="MiscDirectoryBox" Grid.Column="1" Grid.Row="13"
                 Grid.ColumnSpan="4" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"
+                Margin="0,0,0,10"
                  ToolTip="Contents in this directory will be added onto the root template. Use this for thumbnails and other files global to all entries."/>
 
-        <TextBlock x:Name="BGMapDirectoryDesc" Grid.Column="6" Grid.Row="12" Margin="0,0,0,4"
+        <TextBlock x:Name="BGMapDirectoryDesc" Grid.Column="6" Grid.Row="12" Margin="0,8,0,4"
                    Grid.ColumnSpan="6" Text="Background Map Directory" FontSize="16"/>
         <TextBox x:Name="BGMapDirectoryBox" Grid.Column="6" Grid.Row="13"
                 Grid.ColumnSpan="6" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,10"/>
 
         <Button x:Name="ContentCheckButton" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
@@ -213,11 +217,11 @@
                 Height="25" FontSize="16" Content="Create Placeholder Thumbnails"
                 Margin="10,5,10,15" Click="MakePlaceholderThumbnails_Click"/>-->
 
-        <Rectangle Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="13" Fill="#E8E8E9"
+        <!--<Rectangle Grid.Row="16" Grid.Column="0" Grid.ColumnSpan="13" Fill="#E8E8E9"
                    HorizontalAlignment="Stretch" Height="32" Width="auto"/>
         <TextBlock x:Name="HeaderName" Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="13" Margin="0,0,0,0"
                    FontSize="15" FontStyle="Italic" TextWrapping="Wrap" TextAlignment="Center">
             This tool was created by Blixibon for creating Map Labs mod packs from the Map Labs mod template.
-        </TextBlock>
+        </TextBlock>-->
     </Grid>
 </Window>
