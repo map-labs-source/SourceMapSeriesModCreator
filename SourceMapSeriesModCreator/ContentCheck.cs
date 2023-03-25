@@ -191,6 +191,8 @@ namespace SourceMapSeriesModCreator
                     }
                     ConsoleWriter.Write(msg);
                 }
+
+                ConsoleWriter.WriteLine("\nManifests and global script files like these should be avoided when possible.\nPlease convert them to map-specific files and potentially advise the entrant to do the same in the future.\n(Automatic conversion not implemented)");
             }
 
             DiscoveredManifests.Clear();
