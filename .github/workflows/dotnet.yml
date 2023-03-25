@@ -19,7 +19,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
@@ -32,5 +32,5 @@ jobs:
       with:
         name: 'SourceMapSeriesModCreator'
         path: |
-          SourceMapSeriesModCreator/bin/Release/netcoreapp3.1/*
+          SourceMapSeriesModCreator/bin/Release/net7.0-windows/*
         if-no-files-found: error
