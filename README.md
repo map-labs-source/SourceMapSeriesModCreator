@@ -82,7 +82,7 @@ You can save all of the data from the text boxes and entry list by clicking the 
 
 If you open the tool later and/or need to load a different competition's data, click on the **Load** button and select a saved `.xml` file.
 
-**Note that there is currently no mechanism to ask if you want to save before closing the program!!!!!!!!!!!** For now, you should try to save with the tool as often as you should save a map in Hammer to make sure you don't lose any work.
+The tool will automatically ask you to save changes before exiting the program or creating a mod, but you should still try to save as often as you can.
 
 ---
 
@@ -125,3 +125,7 @@ Release builds should not reflect submission order, and should instead be random
 #### Removing the "Dev Build" tag
 
 Before you ship a packaged build, go into its `gameinfo.txt` and remove the "Dev Build" tag.
+
+---
+
+If you need any clarification later on what the different buttons and fields in the tool do, most of them will provide a tooltip when you hover over them with your mouse.
