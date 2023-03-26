@@ -290,7 +290,7 @@ namespace SourceMapSeriesModCreator
             xml.Save(fileName);
         }
 
-        private async void ButtonSaveAnimation(Button button)
+        private /*async*/ void ButtonSaveAnimation(Button button)
         {
             //object buttonContent = button.Content;
 
