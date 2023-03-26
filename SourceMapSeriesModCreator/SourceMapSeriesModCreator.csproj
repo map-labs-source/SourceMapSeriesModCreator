@@ -4,9 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>icon_green.ico</ApplicationIcon>
+    <ApplicationIcon>icon_modcreator.ico</ApplicationIcon>
     <Win32Resource />
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\icon_modcreator.png" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
@@ -24,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\icon_modcreator.png" />
   </ItemGroup>
 
   <ItemGroup>
