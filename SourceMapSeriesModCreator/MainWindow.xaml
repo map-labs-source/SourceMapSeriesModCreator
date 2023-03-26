@@ -60,7 +60,8 @@
         <TextBox x:Name="SourceContentDirectoryBox" Grid.Column="1" Grid.Row="3"
                 Grid.ColumnSpan="4" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                 ToolTip="This should point to a .txt file containing a list of file paths which entries shouldn't overwrite."/>
 
         <TextBlock x:Name="BinDirectoryDesc" Grid.Column="6" Grid.Row="2" Margin="0,0,0,4"
                    Grid.ColumnSpan="6" Text="Bin Directory" FontSize="16"/>
@@ -75,41 +76,47 @@
         <TextBox x:Name="TemplateDirectoryBox" Grid.Column="1" Grid.Row="5"
                 Grid.ColumnSpan="4" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                 ToolTip="This should be a path to the &quot;tokenized&quot; build used as a base to assemble mods."/>
 
         <TextBlock x:Name="OutputDirectoryDesc" Grid.Column="6" Grid.Row="4" Margin="0,0,0,4"
                    Grid.ColumnSpan="4" Text="Output Directory" FontSize="16"/>
         <TextBox x:Name="OutputDirectoryBox" Grid.Column="6" Grid.Row="5"
                 Grid.ColumnSpan="6" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                 ToolTip="This is the path which the assembled mod will output to."/>
 
         <TextBlock x:Name="EventTitle" Grid.Column="1" Grid.Row="6" Margin="0,0,0,4"
                    Text="Event Title" FontSize="16"/>
         <TextBox x:Name="EventTitleBox" Grid.Column="1" Grid.Row="7" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                 ToolTip="This is the title of the event associated with this build. (e.g. &quot;Eye Candy 2&quot;)"/>
 
         <TextBlock x:Name="EventComment" Grid.Column="2" Grid.Row="6" Margin="10,0,0,4"
                    Text="Event Comment" FontSize="16"/>
         <TextBox x:Name="EventCommentBox" Grid.Column="2" Grid.Row="7" Height="25"
                  Grid.ColumnSpan="3"
                 FontSize="15"
-                Margin="10,0,0,20"/>
+                Margin="10,0,0,20"
+                 ToolTip="This is the description of the event associated with this build."/>
 
         <TextBlock x:Name="EventLongPlacement" Grid.Column="1" Grid.Row="8" Margin="0,0,0,4"
                    Grid.ColumnSpan="2" Text="Event Long Placement" FontSize="16"/>
         <TextBox x:Name="EventLongPlacementBox" Grid.Column="1" Grid.Row="9" Height="25"
                  Grid.ColumnSpan="1"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                 ToolTip="This is the competition's long-form anthology placement. (e.g. &quot;Map Labs #19&quot;)"/>
 
         <TextBlock x:Name="EventShortPlacement" Grid.Column="2" Grid.Row="8" Margin="10,0,0,4"
                    Text="Event Short Placement" FontSize="16"/>
         <TextBox x:Name="EventShortPlacementBox" Grid.Column="2" Grid.Row="9" Height="25"
                  Grid.ColumnSpan="1"
                 FontSize="15"
-                Margin="10,0,0,20"/>
+                Margin="10,0,0,20"
+                 ToolTip="This is the competition's short-form anthology placement. (e.g. &quot;ml19&quot;)"/>
 
         <TextBlock x:Name="BackgroundMap" Grid.Column="6" Grid.Row="6" Margin="0,0,0,4"
                    Grid.ColumnSpan="4"
@@ -117,7 +124,8 @@
         <TextBox x:Name="BackgroundMapBox" Grid.Column="6" Grid.Row="7"
                 Grid.ColumnSpan="3" Height="25"
                 FontSize="15"
-                Margin="0,0,0,20"/>
+                Margin="0,0,0,20"
+                 ToolTip="This is the name of the competition's background map. (e.g. &quot;background_ml19&quot;)"/>
 
         <TextBlock x:Name="BackgroundMap2" Grid.Column="10" Grid.Row="6" Margin="0,0,0,4"
                    Grid.ColumnSpan="4"
@@ -126,14 +134,15 @@
                 Grid.ColumnSpan="2" Height="25"
                 FontSize="15"
                 Margin="0,0,0,20"
-                 ToolTip="If specified, this map will be loaded instead when booted to the main menu."/>
+                 ToolTip="If specified, this map will be loaded when disconnected to the main menu instead of the regular background map."/>
 
         <TextBlock x:Name="PackageIntoVPK" Grid.Column="6" Grid.Row="8" Margin="0,0,0,4"
                   Grid.ColumnSpan="3" Text="Package into VPKs" FontSize="14"/>
         <CheckBox x:Name="PackageIntoVPKBox" Grid.Column="6" Grid.Row="9" Height="25" IsChecked="True"
                  Grid.ColumnSpan="1"
                 FontSize="15"
-                Margin="2,0,0,20"/>
+                Margin="2,0,0,20"
+                  ToolTip="Packages each entry into their own VPKs. Requires a valid Bin Directory."/>
 
         <TextBlock x:Name="SortFiles" Grid.Column="9" Grid.Row="8" Margin="0,0,0,4"
                   Grid.ColumnSpan="3" Text="Sort misplaced files" FontSize="14"/>
@@ -150,8 +159,8 @@
                 <!--<DataGridCheckBoxColumn Header="Bonus" Binding="{Binding Bonus}" />-->
                 <DataGridComboBoxColumn Header="Placement" SelectedItemBinding="{Binding Placement}" />
                 <DataGridTextColumn Header="Comment" Binding="{Binding EntryComment}" />
-                <DataGridTextColumn Header="Content Directory" Binding="{Binding ContentDir}" />
-                <DataGridTextColumn Header="Starting Map" Binding="{Binding StartingMap}" />
+                <DataGridTextColumn Header="Content Directory" Width="*" Binding="{Binding ContentDir}" />
+                <DataGridTextColumn Header="Starting Map" Width="100" Binding="{Binding StartingMap}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -187,14 +196,15 @@
                 Grid.ColumnSpan="4" Height="25"
                 FontSize="15"
                 Margin="0,0,0,10"
-                 ToolTip="Contents in this directory will be added onto the root template. Use this for thumbnails and other files global to all entries."/>
+                 ToolTip="Contents in this directory will be added onto the root template. Use this for thumbnails and other files universal to all entries."/>
 
         <TextBlock x:Name="BGMapDirectoryDesc" Grid.Column="6" Grid.Row="12" Margin="0,8,0,4"
                    Grid.ColumnSpan="6" Text="Background Map Directory" FontSize="16"/>
         <TextBox x:Name="BGMapDirectoryBox" Grid.Column="6" Grid.Row="13"
                 Grid.ColumnSpan="6" Height="25"
                 FontSize="15"
-                Margin="0,0,0,10"/>
+                Margin="0,0,0,10"
+                 ToolTip="Use this for content related to the background map."/>
 
         <Button x:Name="ContentCheckButton" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
@@ -205,7 +215,7 @@
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                 Height="25" FontSize="16" Content="Generate File List"
                 Margin="10,5,10,15" Click="SourceContentMakeFileList_Click"
-                ToolTip="Generates a file list from files in the ''Source Content List(s)'' directory."/>
+                ToolTip="Generates a file list for use in &quot;Source Content List(s)&quot;. To use it, copy the directory containing all relevant files into Source Content List(s) and press this button."/>
 
         <Button x:Name="CreateModButton" Grid.Row="14" Grid.Column="10" Grid.ColumnSpan="2"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
