@@ -168,7 +168,8 @@
         <Button x:Name="EntryListAdd" Grid.Row="10" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Height="25" MinWidth="120" FontSize="16" Content="Add Entry"
-                Margin="10,5,10,0" Click="EntryListAdd_Click"/>
+                Margin="10,5,10,0" Click="EntryListAdd_Click"
+                ToolTip="Adds an entry to the entry list."/>
         <!--<Button x:Name="EntryListPrint" Grid.Row="10" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Height="25" FontSize="16" Content="Print Entries"
@@ -176,20 +177,24 @@
         <Button x:Name="EntryListShuffle" Grid.Row="10" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Top"
                 Height="25" FontSize="16" Content="Shuffle Entries"
-                Margin="10,35,10,0" Click="EntryListShuffle_Click"/>
+                Margin="10,35,10,0" Click="EntryListShuffle_Click"
+                ToolTip="Shuffles the ordering of the entry list."/>
 
         <Button x:Name="EntryListSave" Grid.Row="11" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                 Height="25" FontSize="16" Content="Save"
-                Margin="10,10,10,65" Click="EntryListSave_Click"/>
+                Margin="10,10,10,65" Click="EntryListSave_Click"
+                ToolTip="Saves the specified settings and entry list as an XML file."/>
         <Button x:Name="EntryListSaveAs" Grid.Row="11" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                 Height="25" FontSize="16" Content="Save As"
-                Margin="10,10,10,35" Click="EntryListSaveAs_Click"/>
+                Margin="10,10,10,35" Click="EntryListSaveAs_Click"
+                ToolTip="Saves the specified settings and entry list as a new XML file."/>
         <Button x:Name="EntryListLoad" Grid.Row="11" Grid.Column="11"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                 Height="25" FontSize="16" Content="Load"
-                Margin="10,10,10,5" Click="EntryListLoad_Click"/>
+                Margin="10,10,10,5" Click="EntryListLoad_Click"
+                ToolTip="Loads a saved XML file containing settings and entries."/>
 
         <TextBlock x:Name="MiscDirectoryDesc" Grid.Column="1" Grid.Row="12" Margin="0,8,0,4"
                    Text="Misc Directory" FontSize="16"/>
@@ -210,7 +215,8 @@
         <Button x:Name="ContentCheckButton" Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="2"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                 Height="25" FontSize="16" Content="Check for conflicting content"
-                Margin="10,5,10,15" Click="ContentCheck_Click"/>
+                Margin="10,5,10,15" Click="ContentCheck_Click"
+                ToolTip="Checks for conflicting content between the entries, source content, and Misc/Background Map directories."/>
 
         <Button x:Name="SourceContentMakeFileList" Grid.Row="14" Grid.Column="3" Grid.ColumnSpan="7"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
@@ -221,7 +227,8 @@
         <Button x:Name="CreateModButton" Grid.Row="14" Grid.Column="10" Grid.ColumnSpan="2"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
                 Height="25" FontSize="16" Content="Create Mod" Background="LightGreen"
-                Margin="10,5,10,15" Click="CreateMod_Click"/>
+                Margin="10,5,10,15" Click="CreateMod_Click"
+                ToolTip="Packages a mod using the given parameters."/>
 
         <!--<Button x:Name="MakePlaceholderThumbnailsButton" Grid.Row="12" Grid.Column="3" Grid.ColumnSpan="7"
                 HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
