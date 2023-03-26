@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="Map Labs Mod Creator" Height="700" Width="800"
         MinHeight="700" MinWidth="800"
+        Closing="ConfirmExitProgram"
         >
     <!--ResizeMode="NoResize"-->
     <Grid>
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="Resources/MapLabsIcon001a.png"
-                        Opacity="0.2" Stretch="None"/>
-        </Grid.Background>-->
+        <Grid.Background>
+            <ImageBrush ImageSource="Resources/icon_modcreator.png"
+                        Opacity="0.05" Stretch="Fill"/>
+        </Grid.Background>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>

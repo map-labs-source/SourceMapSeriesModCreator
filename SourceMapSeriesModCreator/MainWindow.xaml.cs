@@ -94,7 +94,7 @@ namespace SourceMapSeriesModCreator
             }
 
             DG1.DataContext = EntryData;
-            
+
             //EntryData.Add( new MapEntry("Hot Soft Iron", "chickensushi", CompPlacement.None, "Example") );
             //EntryData.Add( new MapEntry("Light Runner 4", "2upE", CompPlacement.None, "Example") );
             //EntryData.Add( new MapEntry("Average Title", "casstle", CompPlacement.None, "Example") );
@@ -102,11 +102,36 @@ namespace SourceMapSeriesModCreator
 
             //EntryData.Add( new MapEntry("Test Entry 1", "Someone") );
             //EntryData.Add( new MapEntry("test entry 2", "Somebody") );
+
+            // ------------------------------
+
+            BinDirectoryBox.TextChanged += Generic_TextChanged;
+            SourceContentDirectoryBox.TextChanged += Generic_TextChanged;
+
+            TemplateDirectoryBox.TextChanged += Generic_TextChanged;
+            OutputDirectoryBox.TextChanged += Generic_TextChanged;
+
+            MiscDirectoryBox.TextChanged += Generic_TextChanged;
+            BGMapDirectoryBox.TextChanged += Generic_TextChanged;
+
+            EventTitleBox.TextChanged += Generic_TextChanged;
+            EventCommentBox.TextChanged += Generic_TextChanged;
+            BackgroundMapBox.TextChanged += Generic_TextChanged;
+            BackgroundMap2Box.TextChanged += Generic_TextChanged;
+
+            EventLongPlacementBox.TextChanged += Generic_TextChanged;
+            EventShortPlacementBox.TextChanged += Generic_TextChanged;
+
+            PackageIntoVPKBox.Checked += Generic_CheckBoxChanged;
+            SortFilesBox.Checked += Generic_CheckBoxChanged;
+
+            DG1.CurrentCellChanged += new EventHandler<EventArgs>(Generic_DataGridChanged);
         }
 
         private void EntryListAdd_Click(object sender, RoutedEventArgs e)
         {
             EntryData.Add(new MapEntry());
+            SpoilSave();
         }
 
         private void EntryListPrint_Click(object sender, RoutedEventArgs e)
@@ -169,6 +194,13 @@ namespace SourceMapSeriesModCreator
             SourceContentMakeFileList.IsEnabled = toggle;
             CreateModButton.IsEnabled = toggle;
         }
+
+        // -----------------------------------------------------------------------------
+
+        private string LastFileName = null;
+        private Button LastSaveButton = null;
+
+        private bool SaveSpoiled = false;
 
         private void SaveEntries(string fileName)
         {
@@ -260,7 +292,7 @@ namespace SourceMapSeriesModCreator
 
         private async void ButtonSaveAnimation(Button button)
         {
-            object buttonContent = button.Content;
+            //object buttonContent = button.Content;
 
             // Disable both buttons, change the one that was used to "Saved!"
             EntryListSave.IsEnabled = false;
@@ -268,14 +300,14 @@ namespace SourceMapSeriesModCreator
             button.Content = "Saved!";
             button.FontStyle = FontStyles.Italic;
 
-            await Task.Delay(TimeSpan.FromSeconds(3));
+            LastSaveButton = button;
+
+            /*await Task.Delay(TimeSpan.FromSeconds(3));
 
             EntryListSave.IsEnabled = true;
             EntryListSaveAs.IsEnabled = true;
             button.Content = buttonContent;
-            button.FontStyle = FontStyles.Normal;
-
-            //button.IsEnabled = false;
+            button.FontStyle = FontStyles.Normal;*/
 
             // UNDONE: Green flash
 
@@ -295,8 +327,6 @@ namespace SourceMapSeriesModCreator
             //
             //button.Content = buttonContent;
         }
-
-        private string LastFileName = null;
 
         private void EntryListSave_Click(object sender, RoutedEventArgs e)
         {
@@ -424,7 +454,71 @@ namespace SourceMapSeriesModCreator
             }
 
             LastFileName = openFileDialog.FileName;
+            SaveSpoiled = false;
         }
+
+        // -----------------------------------------------------------------------------
+
+        private void SpoilSave()
+        {
+            SaveSpoiled = true;
+
+            EntryListSave.IsEnabled = true;
+            EntryListSaveAs.IsEnabled = true;
+
+            if (LastSaveButton != null)
+            {
+                LastSaveButton.FontStyle = FontStyles.Normal;
+                if (LastSaveButton == EntryListSave)
+                    LastSaveButton.Content = "Save";
+                else
+                    LastSaveButton.Content = "Save As";
+                LastSaveButton = null;
+            }
+        }
+
+        private void Generic_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SpoilSave();
+        }
+
+        private void Generic_CheckBoxChanged(object sender, RoutedEventArgs e)
+        {
+            SpoilSave();
+        }
+
+        private void Generic_DataGridChanged(object sender, EventArgs e)
+        {
+            SpoilSave();
+        }
+
+        private void ConfirmExitProgram(object sender, CancelEventArgs e)
+        {
+            if (SaveSpoiled)
+            {
+                MessageBoxResult result = MessageBox.Show("Would you like to save your changes before exiting?",
+                    "Save", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (LastFileName == null)
+                    {
+                        SaveFileDialog saveFileDialog = new SaveFileDialog();
+                        saveFileDialog.Filter = "XML files (*.xml)|*.xml";
+                        if (saveFileDialog.ShowDialog() == false)
+                        {
+                            e.Cancel = true;
+                            return;
+                        }
+
+                        LastFileName = saveFileDialog.FileName;
+                    }
+
+                    SaveEntries(LastFileName);
+                }
+            }
+        }
+
+        // -----------------------------------------------------------------------------
 
         private bool RanContentCheck = false;
 
@@ -462,6 +556,16 @@ namespace SourceMapSeriesModCreator
 
         private void CreateMod_Click(object sender, RoutedEventArgs e)
         {
+            if (SaveSpoiled)
+            {
+                MessageBoxResult result = MessageBox.Show("Would you like to save your changes before proceeding?",
+                    "Save", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No);
+                if (result == MessageBoxResult.Yes)
+                {
+                    EntryListSave_Click(sender, e);
+                }
+            }
+
             if (!RanContentCheck)
             {
                 MessageBoxResult result = MessageBox.Show("You have not yet checked for conflicting content using the \"Check for conflicting content\" button. Are you sure you want to continue?",
